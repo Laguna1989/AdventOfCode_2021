@@ -1,13 +1,19 @@
 #include "move_command.hpp"
+#include <cassert>
 #include <gtest/gtest.h>
+#include <regex>
 #include <string>
 
 using namespace ::testing;
 
-MoveCommand parse_input(std::string const& /*input*/)
+MoveCommand parse_input(std::string const& input)
 {
-    // TODO replace fake
-    return MoveCommand { Direction::FORWARD, 5 };
+    std::regex pattern { "(\\w+) (\\d+)" };
+    std::smatch match;
+    std::regex_search(input, match, pattern);
+    // auto const& direction_string = match[1];
+    auto const distance = std::stoi(match[2]);
+    return MoveCommand { Direction::FORWARD, distance };
 }
 
 TEST(ParserTest, ForwardInput)
