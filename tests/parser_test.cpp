@@ -1,29 +1,22 @@
+#include "move_command.hpp"
 #include <gtest/gtest.h>
+#include <string>
 
 using namespace ::testing;
 
-enum class Direction { FORWARD };
-
-struct MoveCommand {
-    Direction direction;
-    int distance;
-};
-
-MoveCommand parse_input(std::string const& input)
+MoveCommand parse_input(std::string const& /*input*/)
 {
     // TODO replace fake
     return MoveCommand { Direction::FORWARD, 5 };
 }
 
-TEST(ParserTest, IsThisWorking)
+TEST(ParserTest, ForwardInput)
 {
     std::string const input { "forward 5" };
 
-    MoveCommand expected_command { Direction::FORWARD, 5 };
+    MoveCommand const expected_command { Direction::FORWARD, 5 };
 
-    auto command = parse_input(input);
+    auto const command = parse_input(input);
 
-    // TODO use operator==
-    ASSERT_EQ(expected_command.distance, command.distance);
-    ASSERT_EQ(expected_command.direction, command.direction);
+    ASSERT_EQ(expected_command, command);
 }
