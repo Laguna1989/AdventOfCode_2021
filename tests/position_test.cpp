@@ -1,5 +1,6 @@
 #include "position.hpp"
 #include <gtest/gtest.h>
+#include <sstream>
 
 TEST(PositionTest, InitialValue)
 {
