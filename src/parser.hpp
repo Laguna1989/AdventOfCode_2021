@@ -1,25 +1,12 @@
+#ifndef GUARD_PARSER_HPP
+#define GUARD_PARSER_HPP
 
-MoveCommand parse_input_line(std::string const& input)
-{
-    std::regex pattern { "(\\w+) (\\d+)" };
-    std::smatch match;
-    std::regex_search(input, match, pattern);
-    auto const& direction_string = match[1];
+#include "move_command.hpp"
+#include <string>
+#include <vector>
 
-    auto const direction = direction_from_string(direction_string);
-    auto const distance = std::stoi(match[2]);
-    return MoveCommand { direction, distance };
-}
+MoveCommand parse_input_line(std::string const& input);
 
-std::vector<MoveCommand> parse_input(std::string const& input)
-{
-    std::vector<MoveCommand> commands;
+std::vector<MoveCommand> parse_input(std::string const& input);
 
-    std::stringstream str { input };
-    std::string line;
-    while (std::getline(str, line)) {
-        commands.push_back(parse_input_line(line));
-    }
-
-    return commands;
-}
+#endif
