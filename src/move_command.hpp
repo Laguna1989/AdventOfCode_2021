@@ -1,6 +1,8 @@
 #ifndef MOVE_COMMAND_HPP
 #define MOVE_COMMAND_HPP
 
+#include <string>
+
 enum class Direction { FORWARD };
 
 struct MoveCommand {
@@ -11,5 +13,7 @@ struct MoveCommand {
 bool operator==(MoveCommand const& lhs, MoveCommand const& rhs);
 
 bool operator!=(MoveCommand const& lhs, MoveCommand const& rhs);
+
+std::string toString(MoveCommand const&);
 
 #endif /*MOVE_COMMAND_HPP*/

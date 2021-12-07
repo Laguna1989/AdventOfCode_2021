@@ -6,3 +6,8 @@ bool operator==(MoveCommand const& lhs, MoveCommand const& rhs)
 }
 
 bool operator!=(MoveCommand const& lhs, MoveCommand const& rhs) { return !(lhs == rhs); }
+
+std::string toString(MoveCommand const& command)
+{
+    return "(FORWARD, " + std::to_string(command.distance) + ")";
+}
