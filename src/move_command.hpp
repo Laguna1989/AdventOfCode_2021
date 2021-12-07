@@ -3,7 +3,7 @@
 
 #include <string>
 
-enum class Direction { FORWARD };
+enum class Direction { FORWARD, UP, DOWN };
 
 struct MoveCommand {
     Direction direction;
