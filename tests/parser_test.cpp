@@ -25,7 +25,7 @@ std::vector<MoveCommand> parse_input(std::string const& input)
     std::stringstream str { input };
     std::string line;
     while (std::getline(str, line)) {
-        commands.push_back(parse_input_line(input));
+        commands.push_back(parse_input_line(line));
     }
 
     return commands;
@@ -52,12 +52,28 @@ INSTANTIATE_TEST_SUITE_P(ParserParametrizedTest, ParserParametrizedTestFixture,
 
 TEST(ParserTest, MultiLineInput)
 {
-    auto const input = R"(\
-forward 5
-down 5\
-)";
+    auto const input = R"(forward 5
+down 5)";
     std::vector<MoveCommand> const expected_commands { MoveCommand { Direction::FORWARD, 5 },
         MoveCommand { Direction::DOWN, 5 } };
+
+    auto const parsed_input = parse_input(input);
+
+    ASSERT_EQ(parsed_input, expected_commands);
+}
+
+TEST(ParserTest, BossMonster)
+{
+    auto const input = R"(forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2)";
+    std::vector<MoveCommand> const expected_commands { MoveCommand { Direction::FORWARD, 5 },
+        MoveCommand { Direction::DOWN, 5 }, MoveCommand { Direction::FORWARD, 8 },
+        MoveCommand { Direction::UP, 3 }, MoveCommand { Direction::DOWN, 8 },
+        MoveCommand { Direction::FORWARD, 2 } };
 
     auto const parsed_input = parse_input(input);
 
