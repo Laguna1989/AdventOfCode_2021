@@ -20,3 +20,14 @@ TEST(ParserTest, ForwardInput)
 
     ASSERT_EQ(expected_command, command);
 }
+
+TEST(ParserTest, ForwardInput2)
+{
+    std::string const input { "forward 9" };
+
+    MoveCommand const expected_command { Direction::FORWARD, 9 };
+
+    auto const command = parse_input(input);
+
+    ASSERT_EQ(expected_command, command);
+}

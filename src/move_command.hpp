@@ -14,6 +14,6 @@ bool operator==(MoveCommand const& lhs, MoveCommand const& rhs);
 
 bool operator!=(MoveCommand const& lhs, MoveCommand const& rhs);
 
-std::string toString(MoveCommand const&);
+std::string to_string(MoveCommand const&);
 
 #endif /*MOVE_COMMAND_HPP*/

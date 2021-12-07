@@ -25,7 +25,7 @@ bool operator==(MoveCommand const& lhs, MoveCommand const& rhs)
 
 bool operator!=(MoveCommand const& lhs, MoveCommand const& rhs) { return !(lhs == rhs); }
 
-std::string toString(MoveCommand const& command)
+std::string to_string(MoveCommand const& command)
 {
     return "(" + to_string(command.direction) + ", " + std::to_string(command.distance) + ")";
 }

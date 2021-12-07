@@ -3,13 +3,21 @@
 
 using namespace ::testing;
 
-TEST(MoveCommandTest, ComparisonEquals)
+class MoveCommandEqualsParametrizedTestFixture : public ::testing::TestWithParam<MoveCommand> {
+};
+
+TEST_P(MoveCommandEqualsParametrizedTestFixture, CorrectComparison)
 {
-    MoveCommand const a { Direction::FORWARD, 5 };
-    MoveCommand const b { Direction::FORWARD, 5 };
+    MoveCommand const a { GetParam() };
+    MoveCommand const b { GetParam() };
 
     ASSERT_EQ(a, b);
 }
+
+INSTANTIATE_TEST_SUITE_P(MoveCommandEqualsParametrizedTest,
+    MoveCommandEqualsParametrizedTestFixture,
+    ::testing::Values(MoveCommand { Direction::FORWARD, 5 }, MoveCommand { Direction::UP, 5 },
+        MoveCommand { Direction::FORWARD, 10 }, MoveCommand { Direction::DOWN, -5 }));
 
 TEST(MoveCommandTest, ComparisonNotEquals)
 {
@@ -19,15 +27,17 @@ TEST(MoveCommandTest, ComparisonNotEquals)
     ASSERT_NE(a, b);
 }
 
-class MoveCommandParameterizedValidTestFixture
+class MoveCommandToStringParameterizedBaseTestFixture
     : public ::testing::TestWithParam<std::pair<MoveCommand, std::string>> {
 };
+
+using MoveCommandParameterizedValidTestFixture = MoveCommandToStringParameterizedBaseTestFixture;
 
 TEST_P(MoveCommandParameterizedValidTestFixture, CorrectToString)
 {
     auto const command = GetParam().first;
     auto const expected_string = GetParam().second;
-    ASSERT_EQ(toString(command), expected_string);
+    ASSERT_EQ(to_string(command), expected_string);
 }
 
 INSTANTIATE_TEST_SUITE_P(MoveCommandParameterizedTest, MoveCommandParameterizedValidTestFixture,
@@ -36,18 +46,18 @@ INSTANTIATE_TEST_SUITE_P(MoveCommandParameterizedTest, MoveCommandParameterizedV
         std::make_pair(MoveCommand { Direction::DOWN, 7 }, "(DOWN, 7)"),
         std::make_pair(MoveCommand { Direction::FORWARD, 5 }, "(FORWARD, 5)")));
 
-class MoveCommandParameterizedInvalidTestFixture
-    : public ::testing::TestWithParam<std::pair<MoveCommand, std::string>> {
-};
+using MoveCommandParameterizedInvalidTestFixture = MoveCommandToStringParameterizedBaseTestFixture;
 
 TEST_P(MoveCommandParameterizedInvalidTestFixture, IncorrectToString)
 {
     auto const command = GetParam().first;
     auto const expected_string = GetParam().second;
-    ASSERT_NE(toString(command), expected_string);
+    ASSERT_NE(to_string(command), expected_string);
 }
 
 INSTANTIATE_TEST_SUITE_P(MoveCommandParameterizedInvalidTest,
     MoveCommandParameterizedInvalidTestFixture,
     ::testing::Values(std::make_pair(MoveCommand { Direction::FORWARD, 5 }, "(FORWARD, 10)"),
-        std::make_pair(MoveCommand { Direction::FORWARD, 7 }, "(FORWARD, 5)")));
+        std::make_pair(MoveCommand { Direction::FORWARD, 7 }, "(FORWARD, 5)"),
+        std::make_pair(MoveCommand { Direction::DOWN, 7 }, "(FORWARD, 7)"),
+        std::make_pair(MoveCommand { Direction::DOWN, 22 }, "(UP, 22)")));
