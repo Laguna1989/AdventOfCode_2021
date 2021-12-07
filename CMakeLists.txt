@@ -10,7 +10,7 @@ if(MSVC)
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 endif()
-file(GLOB_RECURSE SOURCEFILES src/*)
+file(GLOB_RECURSE SOURCEFILES CONFIGURE_DEPENDS src/*)
 add_library(Library ${SOURCEFILES})
 target_include_directories(Library PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -48,7 +48,7 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif()
 
 
-file(GLOB_RECURSE UNITTESTFILES tests/*)
+file(GLOB_RECURSE UNITTESTFILES CONFIGURE_DEPENDS tests/*)
 add_executable(unittests ${UNITTESTFILES})
 
 target_link_libraries(unittests gtest_main)
