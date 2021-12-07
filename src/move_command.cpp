@@ -6,11 +6,11 @@ std::string to_string(Direction const& direction)
 {
     switch (direction) {
     case Direction::FORWARD:
-        return "FORWARD";
+        return "forward";
     case Direction::UP:
-        return "UP";
+        return "up";
     case Direction::DOWN:
-        return "DOWN";
+        return "down";
     default:
         return "";
     }
@@ -28,4 +28,17 @@ bool operator!=(MoveCommand const& lhs, MoveCommand const& rhs) { return !(lhs =
 std::string to_string(MoveCommand const& command)
 {
     return "(" + to_string(command.direction) + ", " + std::to_string(command.distance) + ")";
+}
+
+Direction direction_from_string(std::string const& direction_string)
+{
+    Direction direction { Direction::FORWARD };
+    if (direction_string == "forward") {
+        direction = Direction::FORWARD;
+    } else if (direction_string == "up") {
+        direction = Direction::UP;
+    } else if (direction_string == "down") {
+        direction = Direction::DOWN;
+    }
+    return direction;
 }

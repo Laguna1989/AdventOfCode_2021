@@ -16,4 +16,6 @@ bool operator!=(MoveCommand const& lhs, MoveCommand const& rhs);
 
 std::string to_string(MoveCommand const&);
 
+Direction direction_from_string(std::string const& direction_string);
+
 #endif /*MOVE_COMMAND_HPP*/

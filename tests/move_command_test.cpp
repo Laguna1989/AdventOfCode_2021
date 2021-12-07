@@ -41,10 +41,10 @@ TEST_P(MoveCommandParameterizedValidTestFixture, CorrectToString)
 }
 
 INSTANTIATE_TEST_SUITE_P(MoveCommandParameterizedTest, MoveCommandParameterizedValidTestFixture,
-    ::testing::Values(std::make_pair(MoveCommand { Direction::FORWARD, 10 }, "(FORWARD, 10)"),
-        std::make_pair(MoveCommand { Direction::UP, 3 }, "(UP, 3)"),
-        std::make_pair(MoveCommand { Direction::DOWN, 7 }, "(DOWN, 7)"),
-        std::make_pair(MoveCommand { Direction::FORWARD, 5 }, "(FORWARD, 5)")));
+    ::testing::Values(std::make_pair(MoveCommand { Direction::FORWARD, 10 }, "(forward, 10)"),
+        std::make_pair(MoveCommand { Direction::UP, 3 }, "(up, 3)"),
+        std::make_pair(MoveCommand { Direction::DOWN, 7 }, "(down, 7)"),
+        std::make_pair(MoveCommand { Direction::FORWARD, 5 }, "(forward, 5)")));
 
 using MoveCommandParameterizedInvalidTestFixture = MoveCommandToStringParameterizedBaseTestFixture;
 
@@ -57,7 +57,7 @@ TEST_P(MoveCommandParameterizedInvalidTestFixture, IncorrectToString)
 
 INSTANTIATE_TEST_SUITE_P(MoveCommandParameterizedInvalidTest,
     MoveCommandParameterizedInvalidTestFixture,
-    ::testing::Values(std::make_pair(MoveCommand { Direction::FORWARD, 5 }, "(FORWARD, 10)"),
-        std::make_pair(MoveCommand { Direction::FORWARD, 7 }, "(FORWARD, 5)"),
-        std::make_pair(MoveCommand { Direction::DOWN, 7 }, "(FORWARD, 7)"),
-        std::make_pair(MoveCommand { Direction::DOWN, 22 }, "(UP, 22)")));
+    ::testing::Values(std::make_pair(MoveCommand { Direction::FORWARD, 5 }, "(forward, 10)"),
+        std::make_pair(MoveCommand { Direction::FORWARD, 7 }, "(forward, 5)"),
+        std::make_pair(MoveCommand { Direction::DOWN, 7 }, "(forward, 7)"),
+        std::make_pair(MoveCommand { Direction::DOWN, 22 }, "(up, 22)")));
