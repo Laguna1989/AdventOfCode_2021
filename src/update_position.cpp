@@ -6,9 +6,10 @@ Transform update_transform(Transform const& transform, TransformCommand command)
     if (command.direction == Direction::FORWARD) {
         return Transform { transform.horizontal + command.distance, transform.depth };
     } else if (command.direction == Direction::DOWN) {
-        return Transform { transform.horizontal, transform.depth + command.distance };
+        return Transform { transform.horizontal, transform.depth,
+            transform.aim + command.distance };
     }
-    return Transform { transform.horizontal, transform.depth - command.distance };
+    return Transform { transform.horizontal, transform.depth, transform.aim - command.distance };
 }
 
 Transform update_transform_consecutive(std::vector<TransformCommand> const& move_commands)

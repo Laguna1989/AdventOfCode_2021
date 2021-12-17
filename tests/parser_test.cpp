@@ -1,5 +1,5 @@
-#include "transform_command.hpp"
 #include "parser.hpp"
+#include "transform_command.hpp"
 #include <cassert>
 #include <gtest/gtest.h>
 #include <regex>
@@ -31,10 +31,10 @@ TEST(ParserTest, MultiLineInput)
     auto const input = R"(forward 5
 down 5)";
     std::vector<TransformCommand> const expected_commands {
-        TransformCommand { Direction::FORWARD, 5 }, TransformCommand { Direction::DOWN, 5 } };
+        TransformCommand { Direction::FORWARD, 5 }, TransformCommand { Direction::DOWN, 5 }
+    };
 
     auto const parsed_input = parse_input(input);
-
     ASSERT_EQ(parsed_input, expected_commands);
 }
 
@@ -49,7 +49,8 @@ forward 2)";
     std::vector<TransformCommand> const expected_commands {
         TransformCommand { Direction::FORWARD, 5 }, TransformCommand { Direction::DOWN, 5 },
         TransformCommand { Direction::FORWARD, 8 }, TransformCommand { Direction::UP, 3 },
-        TransformCommand { Direction::DOWN, 8 }, TransformCommand { Direction::FORWARD, 2 } };
+        TransformCommand { Direction::DOWN, 8 }, TransformCommand { Direction::FORWARD, 2 }
+    };
 
     auto const parsed_input = parse_input(input);
 
