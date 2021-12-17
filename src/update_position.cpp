@@ -4,7 +4,8 @@
 Transform update_transform(Transform const& transform, TransformCommand command)
 {
     if (command.direction == Direction::FORWARD) {
-        return Transform { transform.horizontal + command.distance, transform.depth };
+        return Transform { transform.horizontal + command.distance,
+            transform.depth + command.distance * transform.aim, transform.aim };
     } else if (command.direction == Direction::DOWN) {
         return Transform { transform.horizontal, transform.depth,
             transform.aim + command.distance };

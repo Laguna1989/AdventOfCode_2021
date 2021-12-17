@@ -15,4 +15,6 @@ bool operator!=(Transform const& lhs, Transform const& rhs);
 
 std::string to_string(Transform const& p);
 
+void PrintTo(Transform const& t, std::ostream* os);
+
 #endif /*POSITION_HPP*/

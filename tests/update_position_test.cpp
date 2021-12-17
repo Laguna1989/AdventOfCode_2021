@@ -2,7 +2,7 @@
 #include "transform_command.hpp"
 #include "update_position.hpp"
 #include <gtest/gtest.h>
-#include <iostream>
+#include <ostream>
 
 namespace std {
 
