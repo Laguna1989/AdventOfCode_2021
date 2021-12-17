@@ -6,6 +6,7 @@
 struct Transform {
     int horizontal { 0 };
     int depth { 0 };
+    int aim { 0 };
 };
 
 bool operator==(Transform const& lhs, Transform const& rhs);

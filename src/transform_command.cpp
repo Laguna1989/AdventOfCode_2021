@@ -4,16 +4,16 @@ namespace {
 
 std::string to_string(Direction const& direction)
 {
-    switch (direction) {
-    case Direction::FORWARD:
+    if (direction == Direction::FORWARD) {
         return "forward";
-    case Direction::UP:
-        return "up";
-    case Direction::DOWN:
-        return "down";
-    default:
-        return "";
     }
+    if (direction == Direction::UP) {
+        return "up";
+    }
+    if (direction == Direction::DOWN) {
+        return "down";
+    }
+    return "";
 }
 
 } // namespace
@@ -32,13 +32,11 @@ std::string to_string(TransformCommand const& command)
 
 Direction direction_from_string(std::string const& direction_string)
 {
-    Direction direction { Direction::FORWARD };
-    if (direction_string == "forward") {
-        direction = Direction::FORWARD;
-    } else if (direction_string == "up") {
-        direction = Direction::UP;
-    } else if (direction_string == "down") {
-        direction = Direction::DOWN;
+    if (direction_string == "up") {
+        return Direction::UP;
     }
-    return direction;
+    if (direction_string == "down") {
+        return Direction::DOWN;
+    }
+    return Direction::FORWARD;
 }
