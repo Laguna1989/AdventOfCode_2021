@@ -5,16 +5,16 @@
 
 enum class Direction { FORWARD, UP, DOWN };
 
-struct MoveCommand {
+struct TransformCommand {
     Direction direction;
     int distance;
 };
 
-bool operator==(MoveCommand const& lhs, MoveCommand const& rhs);
+bool operator==(TransformCommand const& lhs, TransformCommand const& rhs);
 
-bool operator!=(MoveCommand const& lhs, MoveCommand const& rhs);
+bool operator!=(TransformCommand const& lhs, TransformCommand const& rhs);
 
-std::string to_string(MoveCommand const&);
+std::string to_string(TransformCommand const&);
 
 Direction direction_from_string(std::string const& direction_string);
 

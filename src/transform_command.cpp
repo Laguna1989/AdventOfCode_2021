@@ -1,4 +1,4 @@
-#include "move_command.hpp"
+#include "transform_command.hpp"
 
 namespace {
 
@@ -18,14 +18,14 @@ std::string to_string(Direction const& direction)
 
 } // namespace
 
-bool operator==(MoveCommand const& lhs, MoveCommand const& rhs)
+bool operator==(TransformCommand const& lhs, TransformCommand const& rhs)
 {
     return lhs.direction == rhs.direction && lhs.distance == rhs.distance;
 }
 
-bool operator!=(MoveCommand const& lhs, MoveCommand const& rhs) { return !(lhs == rhs); }
+bool operator!=(TransformCommand const& lhs, TransformCommand const& rhs) { return !(lhs == rhs); }
 
-std::string to_string(MoveCommand const& command)
+std::string to_string(TransformCommand const& command)
 {
     return "(" + to_string(command.direction) + ", " + std::to_string(command.distance) + ")";
 }

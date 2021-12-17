@@ -1,22 +1,22 @@
 #include "update_position.hpp"
 #include <algorithm>
 
-Position update_position(Position const& position, MoveCommand command)
+Transform update_transform(Transform const& transform, TransformCommand command)
 {
     if (command.direction == Direction::FORWARD) {
-        return Position { position.x + command.distance, position.y };
+        return Transform { transform.horizontal + command.distance, transform.depth };
     } else if (command.direction == Direction::DOWN) {
-        return Position { position.x, position.y + command.distance };
+        return Transform { transform.horizontal, transform.depth + command.distance };
     }
-    return Position { position.x, position.y - command.distance };
+    return Transform { transform.horizontal, transform.depth - command.distance };
 }
 
-Position update_position_consecutive(std::vector<MoveCommand> const& move_commands)
+Transform update_transform_consecutive(std::vector<TransformCommand> const& move_commands)
 {
-    Position end_position {};
+    Transform end_position {};
     std::for_each(
         move_commands.begin(), move_commands.end(), [&end_position](auto const& move_command) {
-            end_position = update_position(end_position, move_command);
+            end_position = update_transform(end_position, move_command);
         });
     return end_position;
 }

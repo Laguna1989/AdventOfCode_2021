@@ -1,51 +1,52 @@
-#include "move_command.hpp"
-#include "position.hpp"
+#include "transform.hpp"
+#include "transform_command.hpp"
 #include "update_position.hpp"
 #include <gtest/gtest.h>
 
 class UpdatePositionParameterizedTestFixture
-    : public ::testing::TestWithParam<std::pair<MoveCommand, Position>> {
+    : public ::testing::TestWithParam<std::pair<TransformCommand, Transform>> {
 };
 
 TEST_P(UpdatePositionParameterizedTestFixture, CorrectUpdateFromDefaultPosition)
 {
-    Position const default_position { 0, 0 };
+    Transform const default_position { 0, 0 };
 
     auto const move_command = GetParam().first;
     auto const expected_position = GetParam().second;
 
-    auto const updated_position = update_position(default_position, move_command);
+    auto const updated_position = update_transform(default_position, move_command);
     ASSERT_EQ(updated_position, expected_position);
 }
 
 TEST_P(UpdatePositionParameterizedTestFixture, CorrectUpdateFromStartingPosition)
 {
     auto const magic_offset = 20;
-    Position const default_position { magic_offset, magic_offset };
+    Transform const default_position { magic_offset, magic_offset };
 
     auto const move_command = GetParam().first;
-    auto const expected_position
-        = Position { GetParam().second.x + magic_offset, GetParam().second.y + magic_offset };
+    auto const expected_position = Transform { GetParam().second.horizontal + magic_offset,
+        GetParam().second.depth + magic_offset };
 
-    auto const updated_position = update_position(default_position, move_command);
+    auto const updated_position = update_transform(default_position, move_command);
     ASSERT_EQ(updated_position, expected_position);
 }
 
 INSTANTIATE_TEST_SUITE_P(UpdatePositionParameterizedTest, UpdatePositionParameterizedTestFixture,
-    ::testing::Values(std::make_pair(MoveCommand { Direction::FORWARD, 1 }, Position { 1, 0 }),
-        std::make_pair(MoveCommand { Direction::FORWARD, 5 }, Position { 5, 0 }),
-        std::make_pair(MoveCommand { Direction::DOWN, 5 }, Position { 0, 5 }),
-        std::make_pair(MoveCommand { Direction::UP, 5 }, Position { 0, -5 })));
+    ::testing::Values(
+        std::make_pair(TransformCommand { Direction::FORWARD, 1 }, Transform { 1, 0 }),
+        std::make_pair(TransformCommand { Direction::FORWARD, 5 }, Transform { 5, 0 }),
+        std::make_pair(TransformCommand { Direction::DOWN, 5 }, Transform { 0, 5 }),
+        std::make_pair(TransformCommand { Direction::UP, 5 }, Transform { 0, -5 })));
 
 TEST(ConsecutiveMoveCommands, CorrectResult)
 {
-    std::vector<MoveCommand> const move_commands { MoveCommand { Direction::FORWARD, 5 },
-        MoveCommand { Direction::DOWN, 5 }, MoveCommand { Direction::FORWARD, 8 },
-        MoveCommand { Direction::UP, 3 }, MoveCommand { Direction::DOWN, 8 },
-        MoveCommand { Direction::FORWARD, 2 } };
+    std::vector<TransformCommand> const move_commands { TransformCommand { Direction::FORWARD, 5 },
+        TransformCommand { Direction::DOWN, 5 }, TransformCommand { Direction::FORWARD, 8 },
+        TransformCommand { Direction::UP, 3 }, TransformCommand { Direction::DOWN, 8 },
+        TransformCommand { Direction::FORWARD, 2 } };
 
-    Position const expected_position { 15, 10 };
+    Transform const expected_position { 15, 10 };
 
-    auto const updated_position = update_position_consecutive(move_commands);
+    auto const updated_position = update_transform_consecutive(move_commands);
     ASSERT_EQ(updated_position, expected_position);
 }
