@@ -82,5 +82,5 @@ TEST(TransformTest, StringOperator)
     std::stringstream str;
     str << "(" << expected_horizontal << ", " << expected_depth << ", " << expected_aim << ")";
 
-    ASSERT_EQ(toString(p), str.str());
+    ASSERT_EQ(to_string(p), str.str());
 }

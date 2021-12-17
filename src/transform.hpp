@@ -13,6 +13,6 @@ bool operator==(Transform const& lhs, Transform const& rhs);
 
 bool operator!=(Transform const& lhs, Transform const& rhs);
 
-std::string toString(Transform const& p);
+std::string to_string(Transform const& p);
 
 #endif /*POSITION_HPP*/

@@ -8,7 +8,7 @@ bool operator==(Transform const& lhs, Transform const& rhs)
 
 bool operator!=(Transform const& lhs, Transform const& rhs) { return !(lhs == rhs); }
 
-std::string toString(Transform const& p)
+std::string to_string(Transform const& p)
 {
     std::stringstream str;
     str << "(" << p.horizontal << ", " << p.depth << ", " << p.aim << ")";

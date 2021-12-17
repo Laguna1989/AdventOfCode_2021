@@ -2,6 +2,13 @@
 #include "transform_command.hpp"
 #include "update_position.hpp"
 #include <gtest/gtest.h>
+#include <iostream>
+
+namespace std {
+
+ostream& operator<<(ostream& s, Transform const& value) { return s << to_string(value); }
+
+} // namespace std
 
 class UpdatePositionParameterizedTestFixture
     : public ::testing::TestWithParam<std::pair<TransformCommand, Transform>> {
@@ -46,7 +53,7 @@ TEST(ConsecutiveMoveCommands, CorrectResult)
         TransformCommand { Direction::UP, 3 }, TransformCommand { Direction::DOWN, 8 },
         TransformCommand { Direction::FORWARD, 2 } };
 
-    Transform const expected_transform { 15, 60 };
+    Transform const expected_transform { 15, 60, 10 };
 
     auto const updated_transform = update_transform_consecutive(move_commands);
     ASSERT_EQ(updated_transform, expected_transform);
