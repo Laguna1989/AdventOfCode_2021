@@ -3,6 +3,7 @@
 
 #include <bitset>
 
-using Diagnostic_input_type = std::bitset<5>;
+template <int N>
+using Diagnostic_input_type = std::bitset<N>;
 
 #endif // CODE_KATA_TYPES_HPP

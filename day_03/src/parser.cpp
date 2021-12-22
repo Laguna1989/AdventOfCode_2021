@@ -1,5 +1,4 @@
 #include "parser.hpp"
-#include <algorithm>
 #include <sstream>
 
 std::vector<std::string> parse(std::string const& input)
@@ -13,14 +12,5 @@ std::vector<std::string> parse(std::string const& input)
         result.push_back(line);
     }
 
-    return result;
-}
-
-std::vector<Diagnostic_input_type> convert(std::vector<std::string> const& input)
-{
-    std::vector<Diagnostic_input_type> result;
-    result.resize(input.size());
-    std::transform(input.cbegin(), input.cend(), result.begin(),
-        [](auto const& str) { return Diagnostic_input_type { str }; });
     return result;
 }
