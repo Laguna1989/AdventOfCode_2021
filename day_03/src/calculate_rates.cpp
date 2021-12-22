@@ -1,9 +1,19 @@
 #include "calculate_rates.hpp"
 
-std::pair<int, int> calculate_rates(std::vector<Diagnostic_input_type> /*input*/)
+std::pair<unsigned long, unsigned long> calculate_rates(std::vector<Diagnostic_input_type> input)
 {
-    // for (auto const& value : input) {
-    //     //
-    // }
-    return std::pair<int, int> { 0b10010, 0b10010 };
+    // TODO use dynamic type
+    Diagnostic_input_type gamma_rate;
+    for (auto position = 0u; position != 5; ++position) {
+        std::size_t count { 0u };
+        for (auto const& value : input) {
+            if (value[position]) {
+                count++;
+            }
+        }
+        if (count >= input.size() / 2) {
+            gamma_rate[position] = true;
+        }
+    }
+    return std::pair<unsigned long, unsigned long> { gamma_rate.to_ulong(), 0b10010 };
 }
