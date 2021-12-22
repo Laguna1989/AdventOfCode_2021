@@ -1,5 +1,9 @@
-//
-// Created by lagun on 22.12.2021.
-//
-
 #include "calculate_rates.hpp"
+
+std::pair<int, int> calculate_rates(std::vector<Diagnostic_input_type> /*input*/)
+{
+    // for (auto const& value : input) {
+    //     //
+    // }
+    return std::pair<int, int> { 0b10010, 0b10010 };
+}
