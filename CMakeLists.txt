@@ -44,3 +44,4 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif ()
 
 add_subdirectory(day_02)
+add_subdirectory(day_03)
