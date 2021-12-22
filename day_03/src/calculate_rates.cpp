@@ -15,5 +15,6 @@ std::pair<unsigned long, unsigned long> calculate_rates(std::vector<Diagnostic_i
             gamma_rate[position] = true;
         }
     }
-    return std::pair<unsigned long, unsigned long> { gamma_rate.to_ulong(), 0b10010 };
+    return std::pair<unsigned long, unsigned long> { gamma_rate.to_ulong(),
+        gamma_rate.flip().to_ulong() };
 }
