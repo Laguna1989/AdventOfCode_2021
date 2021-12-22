@@ -1,17 +1,21 @@
 #include "parser.hpp"
+#include <sstream>
+
 std::vector<std::string> parse(std::string const& input)
 {
-    return std::vector<std::string> {
-            "00100",
-            "11110",
-            "10110",
-            "10111",
-            "10101",
-            "01111",
-            "00111",
-            "11100",
-            "10000",
-            "11001",
-            "00010",
-            "01010" };
+    std::stringstream str;
+    str << input;
+
+    std::vector<std::string> result;
+    std::string line;
+    while (std::getline(str, line)) {
+        result.push_back(line);
+    }
+
+    return result;
+}
+
+std::vector<std::bitset<5>> convert(std::vector<std::string> const& input)
+{
+    return std::vector<std::bitset<5>> { std::bitset<5> { "00100" } };
 }
