@@ -1,4 +1,5 @@
 #include "parser.hpp"
+#include <algorithm>
 #include <sstream>
 
 std::vector<std::string> parse(std::string const& input)
@@ -17,5 +18,9 @@ std::vector<std::string> parse(std::string const& input)
 
 std::vector<std::bitset<5>> convert(std::vector<std::string> const& input)
 {
-    return std::vector<std::bitset<5>> { std::bitset<5> { "00100" } };
+    std::vector<std::bitset<5>> result;
+    result.resize(input.size());
+    std::transform(input.cbegin(), input.cend(), result.begin(),
+        [](auto const& str) { return std::bitset<5> { str }; });
+    return result;
 }
