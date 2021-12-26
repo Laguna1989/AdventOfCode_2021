@@ -61,3 +61,18 @@ INSTANTIATE_TEST_SUITE_P(CalculateOxygenGeneratorRateParameterizedTest,
         std::make_pair(std::vector<Diagnostic_input_type<5>> { 0b00100, 0b11110, 0b10110, 0b10111,
                            0b10101, 0b01111, 0b00111, 0b11100, 0b10000, 0b11001, 0b00010, 0b01010 },
             0b10111)));
+
+using CalculateCo2ScrubberRateParameterizedTestFixture = CalculateRateParameterizedTestFixture;
+
+TEST_P(CalculateCo2ScrubberRateParameterizedTestFixture, CorrectCo2ScrubberRate)
+{
+    auto const co2_scrubber_rate = calculate_co2_scrubber_rate<5>(GetParam().first);
+    ASSERT_EQ(co2_scrubber_rate, GetParam().second);
+}
+
+INSTANTIATE_TEST_SUITE_P(CalculateCo2ScrubberRateParameterizedTest,
+    CalculateCo2ScrubberRateParameterizedTestFixture,
+    ::testing::Values(
+        std::make_pair(std::vector<Diagnostic_input_type<5>> { 0b00100, 0b11110, 0b10110, 0b10111,
+                           0b10101, 0b01111, 0b00111, 0b11100, 0b10000, 0b11001, 0b00010, 0b01010 },
+            0b01010)));
