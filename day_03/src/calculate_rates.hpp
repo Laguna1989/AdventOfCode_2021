@@ -7,7 +7,7 @@
 #include <vector>
 
 template <int N>
-std::pair<unsigned long, unsigned long> calculate_rates(std::vector<Diagnostic_input_type<N>> input)
+Diagnostic_input_type<N> calculate_gamma_rate_raw(std::vector<Diagnostic_input_type<N>> input)
 {
     Diagnostic_input_type<N> gamma_rate;
     for (auto position = 0u; position != gamma_rate.size(); ++position) {
@@ -21,8 +21,19 @@ std::pair<unsigned long, unsigned long> calculate_rates(std::vector<Diagnostic_i
             gamma_rate[position] = true;
         }
     }
-    return std::pair<unsigned long, unsigned long> { gamma_rate.to_ulong(),
-        gamma_rate.flip().to_ulong() };
+    return gamma_rate;
+}
+
+template <int N>
+unsigned long calculate_gamma_rate(std::vector<Diagnostic_input_type<N>> input)
+{
+    return calculate_gamma_rate_raw(input).to_ulong();
+}
+
+template <int N>
+unsigned long calculate_epsilon_rate(std::vector<Diagnostic_input_type<N>> input)
+{
+    return calculate_gamma_rate_raw(input).flip().to_ulong();
 }
 
 #endif // CODE_KATA_CALCULATE_RATES_HPP

@@ -11,7 +11,7 @@ using CalculateGammaRateParameterizedTestFixture = CalculateRateParameterizedTes
 
 TEST_P(CalculateGammaRateParameterizedTestFixture, CorrectGammaRate)
 {
-    auto [gamma_rate, epsilon_rate] = calculate_rates<5>(GetParam().first);
+    auto const gamma_rate = calculate_gamma_rate<5>(GetParam().first);
     ASSERT_EQ(gamma_rate, GetParam().second);
 }
 
@@ -27,7 +27,7 @@ using CalculateEpsilonRateParameterizedTestFixture = CalculateRateParameterizedT
 
 TEST_P(CalculateEpsilonRateParameterizedTestFixture, CorrectEpsilonRate)
 {
-    auto [gamma_rate, epsilon_rate] = calculate_rates<5>(GetParam().first);
+    auto const epsilon_rate = calculate_epsilon_rate<5>(GetParam().first);
     ASSERT_EQ(epsilon_rate, GetParam().second);
 }
 
@@ -39,9 +39,9 @@ INSTANTIATE_TEST_SUITE_P(CalculateEpsilonRateParameterizedTest,
                            0b10101, 0b01111, 0b00111, 0b11100, 0b10000, 0b11001, 0b00010, 0b01010 },
             0b01001)));
 
-TEST(CalculateGammaRateParameterizedTestFixture, CorrectGammaRate6)
+TEST(CalculateGammaRateParameterizedTestFixture, CorrectGammaRate7)
 {
-    auto [gamma_rate, epsilon_rate]
-        = calculate_rates<7>(std::vector<Diagnostic_input_type<7>> { 0b0010010, 0b0010010 });
+    auto const gamma_rate
+        = calculate_gamma_rate<7>(std::vector<Diagnostic_input_type<7>> { 0b0010010, 0b0010010 });
     ASSERT_EQ(gamma_rate, 0b0010010);
 }
