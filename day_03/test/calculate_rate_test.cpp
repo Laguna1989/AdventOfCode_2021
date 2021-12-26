@@ -45,3 +45,19 @@ TEST(CalculateGammaRateParameterizedTestFixture, CorrectGammaRate7)
         = calculate_gamma_rate<7>(std::vector<Diagnostic_input_type<7>> { 0b0010010, 0b0010010 });
     ASSERT_EQ(gamma_rate, 0b0010010);
 }
+
+using CalculateOxygenGeneratorRateParameterizedTestFixture = CalculateRateParameterizedTestFixture;
+
+TEST_P(CalculateOxygenGeneratorRateParameterizedTestFixture, CorrectOxygenGeneratorRate)
+{
+    auto const oxygen_generator_rate = calculate_oxygen_generator_rate<5>(GetParam().first);
+    ASSERT_EQ(oxygen_generator_rate, GetParam().second);
+}
+
+INSTANTIATE_TEST_SUITE_P(CalculateOxygenGeneratorRateParameterizedTest,
+    CalculateOxygenGeneratorRateParameterizedTestFixture,
+    ::testing::Values(
+        std::make_pair(std::vector<Diagnostic_input_type<5>> { 0b10010, 0b10010 }, 0b10010),
+        std::make_pair(std::vector<Diagnostic_input_type<5>> { 0b00100, 0b11110, 0b10110, 0b10111,
+                           0b10101, 0b01111, 0b00111, 0b11100, 0b10000, 0b11001, 0b00010, 0b01010 },
+            0b10111)));
